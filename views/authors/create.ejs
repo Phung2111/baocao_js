@@ -1,0 +1,159 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .create-container {
+            width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .create-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="create-container">
+        <h2>Create New Author</h2>
+        <form id="formCreate">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <button type="button" onclick="create()">Create</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function create() {
+            // Hiển thị lên cái đang xử lý
+            ShowLoading();
+
+            $.ajax({
+                url: '/api/v1/authors',
+                type: "POST",
+                data: $('#formCreate').serialize()
+            }).done(function (response, textStatus, jqXHR) {
+                if (response.success) {
+                    toastr.success('Tạo thành công');
+                    window.location.href = '/authors/index';
+                } else {
+                    toastr.error('Tạo thất bại');
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                if (textStatus === 'timeout') {
+                    toastr.error('Request time out');
+                } else {
+                    toastr.error(textStatus);
+                }
+            }).always(function () {
+                CloseLoading();
+            });
+        }
+    </script>
+    
+</body>
+</html>
+-->
+
+<%- include('../layout/header') %>
+<!-- Button Start -->
+<div class="container-fluid pt-4 px-4">
+    <div class="row justify-content-center g-4"> <!-- Thêm lớp justify-content-center vào dòng row -->
+        <div class="col-sm-12 col-xl-6"> <!-- Giảm kích thước cột để nội dung không quá rộng -->
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Thêm Tác Giả</h6>
+                <form id="formCreate">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Tên Tác Giả: </label>
+                        <input type="name" class="form-control" id="name" name="name" required aria-describedby="usernameHelp">
+                    </div>
+                    <button type="button" onclick="create()" class="btn btn-primary">Thêm tác giả</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function create() {
+        // Hiển thị lên cái đang xử lý
+        ShowLoading();
+
+        $.ajax({
+            url: '/api/v1/authors',
+            type: "POST",
+            data: $('#formCreate').serialize()
+        }).done(function (response, textStatus, jqXHR) {
+            if (response.success) {
+                toastr.success('Thêm thành công');
+                window.location.href = '/authors/index';
+            } else {
+                toastr.error('Thêm thất bại');
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'timeout') {
+                toastr.error('Request timeout');
+            } else {
+                toastr.error(textStatus);
+            }
+        }).always(function () {
+            CloseLoading();
+        });
+    }
+</script>
+
+<!-- Button End -->
+<%- include('../layout/footer') %>

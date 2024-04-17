@@ -1,0 +1,24 @@
+<%- include('../layout/header') %>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row justify-content-center g-4"> <!-- Thêm lớp justify-content-center vào đây -->
+        <div class="col-sm-12 col-xl-6"> <!-- Giảm kích thước cột để nội dung không quá rộng -->
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Cập nhật người dùng</h6>
+                <form action="/users/update/<%= user._id %>" method="POST">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Tên Người Dùng Cập Nhật: </label>
+                        <input type="text" class="form-control" id="username" name="username" required aria-describedby="usernameHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Gmail Cập Nhật: </label>
+                        <input type="text" class="form-control" id="email" name="email" required aria-describedby="usernameHelp">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../layout/footer') %>

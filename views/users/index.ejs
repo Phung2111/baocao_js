@@ -1,0 +1,36 @@
+<%- include('../layout/header') %>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Bảng Người Dùng</h6>
+                    <a href="/users/register" class="btn btn-primary">thêm người dùng</a>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Số thứ tự</th>
+                                <th scope="col">Tên Người Dùng</th>
+                                <th scope="col">Email người dùng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(function(user, index) { %>
+                                <tr>
+                                    <th scope="row">
+                                        <%= index + 1 %>
+                                    </th>
+                                    <td><a href="/users/detail/<%= user._id %>">
+                                            <%= user.username %>
+                                        </a></td>
+                                    <td>
+                                        <%= user.email %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<%- include('../layout/footer') %>

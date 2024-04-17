@@ -1,0 +1,109 @@
+<!--
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #dc3545;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Author Detail</h2>
+        <p>Name: <%= author.name %></p>
+       
+        <a href="/authors/update/<%= author._id %>">Edit</a>
+        <form action="/authors/delete/<%= author._id %>" method="POST">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this author?')">Delete</button>
+        </form>
+        <a href="/authors/index">Back to List</a>
+    </div>
+</body>
+</html>
+
+-->
+
+
+
+<%- include('../layout/header') %>
+
+<div class="col-sm-12 col-xl-12">
+    <div class="bg-light rounded h-100 p-4">
+        <h6 class="mb-4">Bảng  Tác Giả</h6>
+        <table class="table">
+            <thead>
+                <tr>           
+                    <th scope="col">Tên Tác Giả</th>
+                    <th scope="col">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td><%= author.name %>    </td>
+                        <td><a href="/authors/update/<%= author._id %>" class="btn btn-primary m-2">Edit</a>
+                            <a> <form action="/authors/delete/<%= author._id %>" method="POST">
+                                    <button type="submit" class="btn btn-danger m-2"  onclick="return confirm('Are you sure you want to delete this author?')">Delete</button>
+                                </form>
+                            </a> 
+                            <a>
+                              <a href="/authors/index" class="btn btn-warning m-2">Back to List</a>
+                            </a>
+                        </td>
+                           
+                       
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<%- include('../layout/footer') %>
